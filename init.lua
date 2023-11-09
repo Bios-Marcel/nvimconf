@@ -2,8 +2,8 @@
 -- Editing
 ---------------------------------------
 
--- FIXME Figure
--- vim.cmd("language en_US")
+-- FIXME Figure out, why exactly the language is wrong.
+vim.cmd("language en_US")
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -42,50 +42,25 @@ vim.g.mapleader = " "
 -- Editing end
 ---------------------------------------
 
-
----------------------------------------
--- Util
----------------------------------------
-
-local keyset = vim.keymap.set
-
----------------------------------------
--- Util end
----------------------------------------
-
 ---------------------------------------
 -- Plugin manager
 ---------------------------------------
 
-local lazy = {}
-
-function lazy.install(path)
-  if not vim.loop.fs_stat(path) then
-    print('Installing lazy.nvim....')
-    vim.fn.system({
-      'git',
-      'clone',
-      '--filter=blob:none',
-      'https://github.com/folke/lazy.nvim.git',
-      '--branch=stable', -- latest stable release
-      path,
-    })
-  end
+-- [[ Install `lazy.nvim` plugin manager ]]
+--    https://github.com/folke/lazy.nvim
+--    `:help lazy.nvim.txt` for more info
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system {
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  }
 end
-
-function lazy.setup(plugins)
-  if vim.g.plugins_ready then
-    return
-  end
-
-  -- You can "comment out" the line below after lazy.nvim is installed
-  -- lazy.install(lazy.path)
-
-  vim.opt.rtp:prepend(lazy.path)
-
-  require('lazy').setup(plugins, lazy.opts)
-  vim.g.plugins_ready = true
-end
+vim.opt.rtp:prepend(lazypath)
 
 ---------------------------------------
 -- Plugin manager end
@@ -95,15 +70,13 @@ end
 -- Plugins
 ---------------------------------------
 
-lazy.path = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-lazy.opts = {}
-
-lazy.setup({
+require('lazy').setup({
   -- Theme
-  -- A bit broken with brace highlighting
-  -- { 'nordtheme/vim' },
+  { 'catppuccin/nvim' },
 
+  -- AI autocomplete stuff
   { 'github/copilot.vim' },
+
   -- Basic git integration via 'G' command
   { 'tpope/vim-fugitive' },
 
@@ -145,7 +118,6 @@ lazy.setup({
     },
   },
 
-  -- FIXME Consider
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',  opts = {} },
 
@@ -432,31 +404,21 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    -- ['<Tab>'] = cmp.mapping(function(fallback)
-    --   if cmp.visible() then
-    --     cmp.select_next_item()
-    --   elseif luasnip.expand_or_locally_jumpable() then
-    --     luasnip.expand_or_jump()
-    --   else
-    --     fallback()
-    --   end
-    -- end, { 'i', 's' }),
-    -- ['<S-Tab>'] = cmp.mapping(function(fallback)
-    --   if cmp.visible() then
-    --     cmp.select_prev_item()
-    --   elseif luasnip.locally_jumpable(-1) then
-    --     luasnip.jump(-1)
-    --   else
-    --     fallback()
-    --   end
-    -- end, { 'i', 's' }),
   },
   sources = {
     { name = 'nvim_lsp' },
     -- FIXME Snippets are cool, but I don't care for now.
+    -- Even though we don't use snippets, we still need to specify a snippet
+    -- engine, since cmp shits itself otherwise.
     -- { name = 'luasnip' },
   },
 }
 
--- Nord seems broken
-vim.cmd("colorscheme retrobox")
+vim.cmd("colorscheme catppuccin-macchiato")
+
+-- Basic transparency; Doesn't do floats rn.
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+-- Alternatively use 'xiyaowong/transparent.nvim'
