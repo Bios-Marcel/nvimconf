@@ -1,9 +1,16 @@
 ---------------------------------------
--- Editing
+-- Util
 ---------------------------------------
 
--- FIXME Figure out, why exactly the language is wrong.
-vim.cmd("language en_US")
+local is_windows = vim.loop.os_gethostname():match(".+-win", 1) ~= nil
+
+---------------------------------------
+-- Util end
+---------------------------------------
+
+---------------------------------------
+-- Editing
+---------------------------------------
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -37,6 +44,12 @@ vim.o.timeoutlen = 300
 
 -- Specify leader key (Space)
 vim.g.mapleader = " "
+
+if is_windows then
+  -- Seems to be a bug, I've created an issue:
+  -- https://github.com/neovim/neovim/issues/26006
+  vim.cmd("language en_US")
+end
 
 ---------------------------------------
 -- Editing end
@@ -339,9 +352,8 @@ require('mason-lspconfig').setup()
 local util = require 'lspconfig.util'
 local servers = {
   gopls = {},
-  -- rust_analyzer = {},
   tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+  zls = {},
 
   lua_ls = {
     Lua = {
@@ -350,6 +362,11 @@ local servers = {
     },
   },
 }
+
+if is_windows then
+  servers.powershell_es = {}
+end
+
 
 -- Setup neovim lua configuration
 require('neodev').setup()
