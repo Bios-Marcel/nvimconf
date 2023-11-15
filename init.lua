@@ -349,7 +349,6 @@ require('mason-lspconfig').setup()
 --
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
-local util = require 'lspconfig.util'
 local servers = {
   gopls = {},
   tsserver = {},
