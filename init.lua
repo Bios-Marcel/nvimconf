@@ -327,9 +327,9 @@ local on_attach = function(_, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 end
----------------------------------------
--- Formatting end
----------------------------------------
+
+-- Autoformat on save
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
 
 ---------------------------------------
 -- LSP Schtuff
