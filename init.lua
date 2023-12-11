@@ -362,6 +362,7 @@ local servers = {
   gopls = {},
   tsserver = {},
   zls = {},
+  marksman = {},
 
   lua_ls = {
     Lua = {
