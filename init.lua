@@ -363,6 +363,7 @@ local servers = {
   tsserver = {},
   zls = {},
   marksman = {},
+  cssls = {},
 
   lua_ls = {
     Lua = {
