@@ -28,6 +28,9 @@ vim.opt.number = true
 vim.wo.relativenumber = true
 -- Line numbers in file explorer
 vim.g.netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+-- Swap the split directions, so that the focus feels more natural
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
 -- Visualise 80 and 120 character limit
 vim.opt.colorcolumn = '+1,+41'
