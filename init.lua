@@ -366,6 +366,7 @@ require('mason-lspconfig').setup()
 --
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
+--  https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local servers = {
   gopls = {
     gopls = {
