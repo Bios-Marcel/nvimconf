@@ -560,7 +560,7 @@ cmp.setup {
     end,
   },
   completion = {
-    completeopt = 'menu,menuone,noinsert',
+    completeopt = 'noinsert',
   },
   mapping = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -571,6 +571,16 @@ cmp.setup {
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
+    },
+  },
+  -- Required, so we actually select the first item according to our sorting
+  -- options and not according to alphabetical order.
+  preselect = cmp.PreselectMode.None,
+  sorting = {
+    priority_weight = 1.0,
+    comparators = {
+      cmp.config.compare.locality,
+      cmp.config.compare.order,
     },
   },
   sources = {
