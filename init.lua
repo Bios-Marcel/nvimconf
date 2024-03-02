@@ -96,9 +96,6 @@ require('lazy').setup({
   -- Theme
   { 'catppuccin/nvim' },
 
-  -- AI autocomplete stuff
-  { 'github/copilot.vim' },
-
   -- Basic git integration via 'G' command
   { 'tpope/vim-fugitive' },
 
