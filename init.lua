@@ -654,3 +654,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
+
+---
+--- Macros
+---
+
+-- FIXME Conditional only for go files.
+vim.keymap.set('n', '<leader>er', function()
+  vim.api.nvim_input('oif err != nil {<cr><tab>return err<cr>}<esc>b')
+end)
