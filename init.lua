@@ -25,6 +25,7 @@ vim.opt.mouse = 'a'
 
 -- Line numbers
 vim.opt.number = true
+vim.opt.cursorline = true
 vim.wo.relativenumber = true
 -- Line numbers in file explorer
 vim.g.netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
