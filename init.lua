@@ -565,7 +565,7 @@ luasnip.config.setup {}
 
 ---@diagnostic disable-next-line: missing-fields
 cmp.setup {
-  snippet = {
+  snippet    = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
@@ -573,7 +573,7 @@ cmp.setup {
   completion = {
     completeopt = 'noinsert',
   },
-  mapping = cmp.mapping.preset.insert {
+  mapping    = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
@@ -586,15 +586,15 @@ cmp.setup {
   },
   -- Required, so we actually select the first item according to our sorting
   -- options and not according to alphabetical order.
-  preselect = cmp.PreselectMode.None,
-  sorting = {
+  preselect  = cmp.PreselectMode.None,
+  sorting    = {
     priority_weight = 1.0,
     comparators = {
       cmp.config.compare.locality,
       cmp.config.compare.order,
     },
   },
-  sources = {
+  sources    = {
     { name = 'nvim_lsp' },
     -- FIXME Snippets are cool, but I don't care for now.
     -- Even though we don't use snippets, we still need to specify a snippet
@@ -602,6 +602,7 @@ cmp.setup {
     -- { name = 'luasnip' },
   },
 }
+cmp.visible_docs()
 
 vim.cmd("colorscheme catppuccin-macchiato")
 
