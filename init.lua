@@ -112,6 +112,9 @@ require('lazy').setup({
   -- Debugger UI
   { 'rcarriga/nvim-dap-ui' },
 
+  -- Highlight selected word in visual space, not the whole file.
+  { 'tzachar/local-highlight.nvim' },
+
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -191,8 +194,18 @@ require('lazy').setup({
 -- Plugins end
 ---------------------------------------
 
-require("dapui").setup()
+require('local-highlight').setup({
+  hlgroup = 'Search',
+  cw_hlgroup = nil,
+  -- Whether to display highlights in INSERT mode or not
+  insert_mode = false,
+})
 
+---------------------------------------
+-- Debugger
+---------------------------------------
+
+require("dapui").setup()
 require('dap-go').setup {
   -- Additional dap configurations can be added.
   -- dap_configurations accepts a list of tables where each entry
