@@ -2,7 +2,10 @@
 -- Util
 ---------------------------------------
 
-local is_windows = vim.loop.os_gethostname():match(".+-win", 1) ~= nil
+local is_linux = vim.loop.os_uname().sysname == 'Linux'
+-- If both linux and windows are true, it is WSL
+local is_windows = vim.loop.os_gethostname():match(".+-win", 1) ~= nil and not is_linux
+
 
 ---------------------------------------
 -- Util end
