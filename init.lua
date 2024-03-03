@@ -26,12 +26,20 @@ vim.opt.syntax = 'on'
 vim.opt.ttyfast = true
 vim.opt.mouse = 'a'
 
+-- Minimal number of screen lines to keep above and below the cursor.
+vim.opt.scrolloff = 5
+
+-- Sets how neovim will display certain whitespace in the editor.
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
 -- Line numbers
 vim.opt.number = true
 vim.opt.cursorline = true
 vim.wo.relativenumber = true
 -- Line numbers in file explorer
 vim.g.netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+
 -- Swap the split directions, so that the focus feels more natural
 vim.opt.splitbelow = true
 vim.opt.splitright = true
@@ -53,6 +61,13 @@ vim.o.timeoutlen = 300
 
 -- Specify leader key (Space)
 vim.g.mapleader = " "
+
+-- Save undo history
+vim.opt.undofile = true
+
+-- Set highlight on search, but clear on pressing <Esc> in normal mode
+vim.opt.hlsearch = true
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 if is_windows then
   -- Seems to be a bug, I've created an issue:
