@@ -60,8 +60,8 @@ if is_windows then
   vim.cmd("language en_US")
 end
 
--- Yank to system clipboard
-vim.opt.clipboard = 'unnamedplus'
+-- Yank to system clipboard; This increases startup time a lot in WSL.
+-- vim.opt.clipboard = 'unnamedplus'
 
 ---------------------------------------
 -- Editing end
