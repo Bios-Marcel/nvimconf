@@ -161,13 +161,8 @@ require('lazy').setup({
         'L3MON4D3/LuaSnip',
         version = 'v1.*',
       },
-      'saadparwaiz1/cmp_luasnip',
-
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
-
-      -- Adds a number of user-friendly snippets
-      -- 'rafamadriz/friendly-snippets',
     },
   },
 
