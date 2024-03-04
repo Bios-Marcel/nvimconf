@@ -591,6 +591,14 @@ cmp.setup {
   completion = {
     completeopt = 'noinsert',
   },
+  view       = {
+    docs = {
+      -- This does work, but not if the given symbol isn't imported yet.
+      -- For example in a go file `os.` will not show docs, if `os` isn't import
+      -- at the time of autocompleting.
+      auto_open = true,
+    },
+  },
   mapping    = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -620,7 +628,6 @@ cmp.setup {
     -- { name = 'luasnip' },
   },
 }
-cmp.visible_docs()
 
 vim.cmd("colorscheme catppuccin-macchiato")
 
