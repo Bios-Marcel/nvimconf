@@ -303,6 +303,9 @@ require('telescope').setup {
         preview_cutoff = 10,
       },
     },
+    preview = {
+      filesize_limit = 0.1,      --0.5 MB
+    },
     mappings = {
       i = {
         ['<C-u>'] = false,
@@ -352,7 +355,16 @@ vim.defer_fn(function()
     auto_install = false,
 
     highlight = { enable = true },
-    indent = { enable = true },
+    indent = {
+      enable = true,
+      disable = function(_, buf)
+        local max_filesize = 500 * 1024 -- 500 KB
+        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        if ok and stats and stats.size > max_filesize then
+          return true
+        end
+      end,
+    },
     incremental_selection = {
       enable = true,
       keymaps = {
